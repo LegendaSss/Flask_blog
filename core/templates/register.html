@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="registration-form">
+	<div class='fieldset'>
+        <legend>Регайся бро!</legend>
+        <form action="#" method="post" data-validate="parsley">
+            <div class='row'>
+                <label for='email'>email</label>
+                <input type="text" placeholder="Введите email" name='email' id='firstname' data-required="true" data-error-message="Your First Name is required">
+            </div>
+            <div class='row'>
+                <label for="password">Пароль</label>
+                <input type="text" placeholder="Введите пароль" name='password' data-required="true" data-type="password" data-error-message="Your E-mail is required">
+            </div>
+            </div>
+            <input type="submit" value="Регистрация">
+        </form>
+    </div>
+</div>
+{% endblock %}

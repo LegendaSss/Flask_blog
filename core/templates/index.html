@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой Сайт</title>
+    <style>
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://kartinkin.net/pics/uploads/posts/2022-08/1660252016_33-kartinkin-net-p-fon-dlya-prezentatsii-delovoi-kreativnii-k-33.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            animation: blink 1s infinite; 
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: rgb(189, 240, 20);">!!!Добро пожаловать на мой сайт!!!</h1>
+    </header>
+    
+    <main>
+        <section id="intro">
+            <h2>Что мы предлагаем</h2>
+            <p>Мы предоставляем уникальную платформу, где вы можете делиться своими идеями и постами с миром. Начните создавать и делиться сегодня!</p>
+        </section>
+{% endblock %}

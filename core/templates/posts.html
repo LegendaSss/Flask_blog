@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h1 style="color: green;">Все посты на сайте</h1><br>
+
+  {% if posts|length > 0 %}
+    {% for el in posts %}
+      <div class="wrap animate pop">
+        <div class="overlay">
+          <div class="overlay-content animate slide-left delay-2">
+            <h1 class="animate slide-left pop delay-4">{{ el.title }}</h1>
+            <p class="animate slide-left pop delay-5" style="color: white; margin-bottom: 2.5rem;">Дата: <em>{{ el.date.date() }}</em></p>
+          </div>
+          <div class="image-content animate slide delay-5">
+            <!-- Добавьте изображение поста здесь, если у вас есть поле для изображения в объекте поста -->
+          </div>
+          <div class="dots animate">
+            <div class="dot animate slide-up delay-6"></div>
+            <div class="dot animate slide-up delay-7"></div>
+            <div class="dot animate slide-up delay-8"></div>
+          </div>
+        </div>
+        <div class="text">
+          <p>{{ el.content }}</p>
+          <a href="{{ url_for('post_detail', post_id=el.id) }}" class="btn btn-primary">Детальнее</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p><h5>На данный момент на сайте нет постов!</h5></p>
+  {% endif %}
+</div>
+
+{% endblock %}
+
+

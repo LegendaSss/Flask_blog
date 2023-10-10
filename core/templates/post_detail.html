@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="wrap animate pop">
+	<div class="overlay">
+		<div class="overlay-content animate slide-left delay-2">
+			<h1 class="animate slide-left pop delay-4">{{ post.title }}</h1>
+			<p class="animate slide-left pop delay-5" style="color: white; margin-bottom: 2.5rem;">Дата: <em>{{ post.date.date() }}</em></p>
+		</div>
+		<div class="image-content animate slide delay-5">
+			<!-- Добавьте изображение поста здесь, если у вас есть поле для изображения в объекте поста -->
+		</div>
+		<div class="dots animate">
+			<div class="dot animate slide-up delay-6"></div>
+			<div class="dot animate slide-up delay-7"></div>
+			<div class="dot animate slide-up delay-8"></div>
+		</div>
+	</div>
+	<div class="text">
+		<p>{{ post.content }}</p>
+	</div>
+</div>
+
+<div class="container mt-5">
+
+	{% if current_user.is_authenticated %}
+  <div class="mx-auto d-block mb-3">
+		<a href="/posts/{{ post.id }}/delete" class="btn btn-danger">Удалить пост</a>
+		<a href="/posts/{{ post.id }}/update" class="btn btn-success">Редактировать пост</a>
+
+		<form method="POST" action="{{ url_for('add_comment', post_id=post.id) }}">
+			<div class="form-group">
+				<label for="comment_content">Добавить комментарий</label>
+				<textarea class="form-control" id="comment_content" name="comment_content" placeholder="Введите ваш комментарий здесь" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Отправить комментарий</button>
+		</form>
+
+		{% for comment in comments %}
+			<div class="alert alert-info">
+				<h4>{{ comment.content }}</h4>
+				{% if current_user.is_authenticated and comment.name == current_user.email %}
+					<form method="POST" action="{{ url_for('delete_comment', post_id=post.id, comment_id=comment.id) }}">
+						<button type="submit" class="btn btn-danger">Удалить комментарий</button>
+					</form>
+				{% endif %}
+			</div>
+		{% endfor %}
+
+		<div class="like-dislike-container">
+			<span class="like-count"></span>
+			<form action="{{ url_for('like_post', post_id=post.id) }}" method="post">
+				<button type="submit" class="btn btn-primary">Нравится</button>{{ post_likes }}
+			</form>
+		</div>
+		
+		<div class="like-dislike-container">
+			<span class="dislike-count"></span>
+			<form action="{{ url_for('dislike_post', post_id=post.id) }}" method="post">
+				<button type="submit" class="btn btn-danger">Не нравится</button>{{ post_dislikes }}
+			</form>
+		</div>
+	{% else %}
+		<p><h5>Авторизуйтесь, чтобы добавить комментарий!</h5></p>
+	{% endif %}
+</div>
+{% endblock %}
